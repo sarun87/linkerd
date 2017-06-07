@@ -41,7 +41,7 @@ define([
       RouterServices(realCollector, initialData, $container);
       realCollector.__update__(metricsJson);
 
-      var $multiplierRouter = $($container.find(".router-multiplier")[0]);
+      var $multiplierRouter = $($container.find("[data-router='multiplier']")[0]);
       var $multiplierSvcs = $multiplierRouter.find(".svc-container");
       var $svcClients = $($multiplierSvcs[0]).find(".client-metrics");
 
@@ -58,7 +58,7 @@ define([
       RouterServices(realCollector, initialData, $container);
       realCollector.__update__(metricsJson);
 
-      var $multiplierRouter = $($container.find(".router-multiplier")[0]);
+      var $multiplierRouter = $($container.find("[data-router='multiplier']")[0]);
       var $multiplierSvcs = $multiplierRouter.find(".svc-container");
       var $svcClients = $($multiplierSvcs[0]).find(".client-metrics");
 
@@ -66,6 +66,7 @@ define([
       expect($svcClients.length).toBe(3);
 
       realCollector.__update__(expiredMetricsJson);
+
       $svcClients = $($multiplierSvcs[0]).find(".client-metrics");
 
       expect($svcClients.length).toBe(0);
@@ -80,7 +81,7 @@ define([
       RouterServices(realCollector, initialData, $container);
       realCollector.__update__(metricsJson);
 
-      var $testRouter = $($container.find(".router-service_test")[0]);
+      var $testRouter = $($container.find("[data-router='service_test']")[0]);
       var $multipleSvcs = $testRouter.find(".svc-container");
       var $svcClients1 = $($multipleSvcs[0]).find(".client-metrics");
       var $svcClients2 = $($multipleSvcs[1]).find(".client-metrics");
