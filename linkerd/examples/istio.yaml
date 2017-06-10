@@ -1,0 +1,26 @@
+# A fairly minimal linkerd configuration with istio exporting.
+
+# Test against mixer with:
+# docker run -p 9091:9091 -p 9094:9094 -p 42422:42422 docker.io/istio/mixer:stable-1eb238c --configStoreURL=fs:///etc/opt/mixer/configroot --logtostderr -v 3
+
+admin:
+  port: 9990
+
+telemetry:
+- kind: io.l5d.istio
+  experimental: true
+  hostname: 192.168.99.100
+  port: 9091
+  gaugeIntervalMs: 2000
+
+# An example service discovery backend that uses the filesystem to resolve endpoints.
+namers:
+- kind: io.l5d.fs
+  rootDir: linkerd/examples/io.l5d.fs
+
+routers:
+- protocol: http
+  dtab: /svc => /#/io.l5d.fs
+  servers:
+  - port: 4140
+    ip: 0.0.0.0
